@@ -39,23 +39,27 @@ public class part4_3 {
             int p = in.nextInt();
             a[i] = p;
         }
-        System.out.print(cposl(a));
+        int n2 = in.nextInt();
+        long[] b = new long[n2];
+        for (int i = 0; i < n2; i++) {
+            int p = in.nextInt();
+            b[i] = p;
+        }
+        System.out.print(cposl(a,b));
     }
-    public static int cposl(long[] a){
-        int len = 1;
-        int[] d = new int[a.length];
-        d[0] = 1;
-        for (int i = 1; i<d.length; i++){
-            d[i] = 0;
-            for (int j = 0; j < i; j++){
-                if (a[j]==0) continue;
-                if (a[i]%a[j] == 0) {
-                    if (d[j]>d[i]) d[i] =d[j];
+    public static int cposl(long[] a,long[] b){
+        int len;
+        int[][] res = new int[a.length + 1][b.length + 1];
+        for (int i = 1; i <= a.length; i++) {
+            for (int j = 1; j <= b.length; j++) {
+                if (a[i - 1] == b[j - 1]) {
+                    res[i][j] =  (res[i - 1][j - 1] + 1);
+                } else {
+                    res[i][j] =  Math.max(res[i - 1][j], res[i][j - 1]);
                 }
             }
-            d[i]++;
-            if (d[i] > len) len =d[i];
         }
+        len = res[a.length][b.length];
         return len;
     }
 }
