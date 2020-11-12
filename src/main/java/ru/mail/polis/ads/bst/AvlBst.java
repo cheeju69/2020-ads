@@ -101,10 +101,11 @@ public class AvlBst<Key extends Comparable<Key>, Value>
         if (nd == null) {
             return null;
         }
-        if (key.compareTo(nd.key) < 0) {
+        int keyCompare = key.compareTo(nd.key);
+        if (keyCompare < 0) {
             return get(nd.left, key);
         }
-        if (key.compareTo(nd.key) > 0) {
+        if (keyCompare > 0) {
             return get(nd.right, key);
         }
         return nd;
@@ -120,9 +121,10 @@ public class AvlBst<Key extends Comparable<Key>, Value>
             size++;
             return new Node(key, value, 1);
         }
-        if (key.compareTo(nd.key) < 0) {
+        int keyCompare = key.compareTo(nd.key);
+        if (keyCompare < 0) {
             nd.left = put(nd.left, key, value);
-        } else if (key.compareTo(nd.key) > 0) {
+        } else if (keyCompare > 0) {
             nd.right = put(nd.right, key, value);
         } else {
             nd.value = value;
@@ -147,13 +149,14 @@ public class AvlBst<Key extends Comparable<Key>, Value>
         if (nd == null) {
             return null;
         }
-        if (key.compareTo(nd.key) < 0) {
+        int keyCompare = key.compareTo(nd.key);
+        if (keyCompare < 0) {
             nd.left = remove(nd.left, key);
         }
-        if (key.compareTo(nd.key) > 0) {
+        if (keyCompare > 0) {
             nd.right = remove(nd.right, key);
         }
-        if (key.compareTo(nd.key) == 0) {
+        if (keyCompare == 0) {
             nd = innerRemove(nd);
         }
         return nd;
@@ -208,10 +211,11 @@ public class AvlBst<Key extends Comparable<Key>, Value>
         if (nd == null) {
             return null;
         }
-        if (nd.key.compareTo(key) == 0) {
+        int keyCompare = nd.key.compareTo(key);
+        if (keyCompare == 0) {
             return nd;
         }
-        if (nd.key.compareTo(key) > 0) {
+        if (keyCompare > 0) {
             return floor(nd.left, key);
         }
 
@@ -230,10 +234,11 @@ public class AvlBst<Key extends Comparable<Key>, Value>
         if (nd == null) {
             return null;
         }
-        if (nd.key.compareTo(key) == 0) {
+        int keyCompare = nd.key.compareTo(key);
+        if (keyCompare == 0) {
             return nd;
         }
-        if (nd.key.compareTo(key) < 0) {
+        if (keyCompare < 0) {
             return ceil(nd.right, key);
         }
 
